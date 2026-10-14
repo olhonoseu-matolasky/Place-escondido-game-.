@@ -1,0 +1,17 @@
+name: Build APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.3.0
+          include-templates: true
+      - run: mkdir -p build
+      - run: godot --headless --export-release "Android" build/place-escondido.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk
+          path: build/*.apk
