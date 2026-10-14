@@ -5,13 +5,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: chickensoft-games/setup-godot@v2
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v1
         with:
           version: 4.3.0
           include-templates: true
-      - run: mkdir -p build
-      - run: godot --headless --export-release "Android" build/place-escondido.apk
-      - uses: actions/upload-artifact@v4
+      - name: Import
+        run: godot --headless --import || true
+      - name: Make build folder
+        run: mkdir -p build
+      - name: Export APK
+        run: godot --headless --export-debug "Android" build/place-escondido.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
           name: apk
           path: build/*.apk
