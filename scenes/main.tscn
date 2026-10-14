@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[property name="environment" type="Object" id="1"]
+[sub_resource type="Environment" id="1"]
+background_mode = 1
+background_color = Color(0.5, 0.8, 1, 1)
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, -0.8, 0.3, 0, 0.3, 0.8, -0.8, 0, 0.5, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Chao" type="CSGBox3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -0.5, 0)
+material_override = SubResource("1")
+[sub_resource type="StandardMaterial3D" id="2"]
+albedo_color = Color(0.8, 0.6, 0.3, 1)
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
+
+[node name="Camera" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.7, 0.7, 0, -0.7, 0.7, 0, 2, -6)
+
+[node name="Mesh" type="CSGCapsule3D" parent="Player"]
+material_override = SubResource("2")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 100.0
+text = "PLACE ESCONDIDO - MATOLA OPEN WORLD
+WASD para mover"
